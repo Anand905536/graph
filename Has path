@@ -1,0 +1,56 @@
+ Scanner sc = new Scanner(System.in);
+        int V = sc.nextInt();   //br.read() - '0';
+        //br.read();
+        int E = sc.nextInt();  //br.read() - '0';
+        //br.readLine();
+        if(V == 0)
+        {
+            return;
+        }
+        int matrix[][] = new int[V][V];
+        
+        for(int i = 0; i < E; i++)
+        {
+            int k = sc.nextInt(); //br.read() - '0';
+            //br.read();
+            int l = sc.nextInt();//br.read() - '0';
+            
+            matrix[k][l] = 1;
+            matrix[l][k] = 1;
+            
+            //br.readLine();
+        }
+        
+        boolean visited[] = new boolean[V];
+        //Bft(matrix, 0, visited);
+        
+        for(int i = 0; i < V; i++)
+        {
+            if(!visited[i])
+            Bft(matrix, i, visited);
+        }
+	}
+    
+    private static void Bft(int[][] mat, int currV, boolean[] visited)
+    {
+        Queue<Integer> Q = new LinkedList<>();
+        Q.add(currV);
+        visited[currV] = true;
+        
+        while(!Q.isEmpty())
+        {
+            int n = Q.poll();
+            System.out.print(n +" ");
+            
+            for(int i = 0; i < mat.length; i++)
+            {
+                if(mat[n][i] == 1 && !visited[i])
+                {
+                    Q.add(i);
+                    visited[i] = true;
+                }
+            }
+        }
+    }
+
+}
