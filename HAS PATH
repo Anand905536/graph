@@ -1,0 +1,74 @@
+import java.util.LinkedList;
+import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+public class Solution {
+
+		
+    
+    public static boolean hasPath(int[][] edge,int v1,int v2)
+    {
+        boolean[] visited = new boolean[edge.length];
+        return pathhelper(edge,v1,v2,visited);
+    }
+    
+    public static boolean pathhelper(int[][] edge,int v1,int v2,boolean[] visited)
+    {
+        if(v1>= edge.length || v2>=edge.length)
+        {
+            return false;
+        }
+      
+        if(edge[v1][v2]==1) 
+        return true;
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.add(v1);
+        visited[v1]= true;
+        
+        while(!q.isEmpty())
+        {
+            int rem= q.remove();
+            for(int i=0;i<edge.length;i++)
+            {
+                if(edge[rem][i]==1 && !visited[i])
+                {
+                    if(i==v2) 
+                    {
+                    return true;
+                    }
+                    else
+                    {
+                        visited[i] = true;
+                        q.add(i);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static void main(String[] args) throws NumberFormatException, IOException
+        {
+        Scanner sc = new Scanner(System.in);
+        int v = sc.nextInt();
+        int e = sc.nextInt();
+        int[][] edge = new int[v][v];
+        
+        for(int i=0;i<e;i++)
+        {
+            int fv = sc.nextInt();
+            int sv = sc.nextInt();
+            edge[fv][sv] = 1;
+            edge[sv][fv] = 1;
+            
+        }
+       
+        int v1 = sc.nextInt();
+        int v2 = sc.nextInt();
+        System.out.println(hasPath(edge,v1,v2));
+	}
+
+}
+        
