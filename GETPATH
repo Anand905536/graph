@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.*;
+public class Solution {
+    public static ArrayList<Integer> getpath(int[][] a,int s,int e,boolean vis[])
+    {
+        if(s==e)
+        {
+            ArrayList<Integer> ans=new ArrayList<>();
+            vis[s]=true;
+            ans.add(s);
+            return ans;
+        }
+        vis[s]=true;
+        
+        for(int i=0;i<a.length;i++)
+        {
+           if(a[s][i]==1 && !vis[i])
+           {
+               ArrayList<Integer> arr=getpath(a,i,e,vis);
+               if(arr!=null)
+               {
+                   arr.add(s);
+                   return arr;
+               }
+           }
+           
+        }
+        return null;
+        
+    }
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+        
+      Scanner s=new Scanner(System.in);
+        int v=s.nextInt();
+        int e=s.nextInt();
+        int a[][]=new int[v][v];
+        for(int i=0;i<e;i++)
+        {
+                int v1=s.nextInt();
+                int v2=s.nextInt();
+                a[v1][v2]=1;
+                a[v2][v1]=1;
+        }
+       int start=s.nextInt();
+        int end=s.nextInt();
+        boolean vis[]=new boolean[v];
+        ArrayList<Integer> holdpath=getpath(a,start,end,vis);
+        if(holdpath!=null){
+      for(int ele:holdpath)System.out.print(ele+" ");
+        }
+        
+
+	}
+}
