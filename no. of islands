@@ -1,0 +1,29 @@
+public class Solution {
+    public static void dfs(int[][] edges, int ind,boolean vis[])
+    {
+        vis[ind]=true;
+        for(int i=0;i<edges.length;i++)
+        {
+            if(edges[ind][i]==1 && !vis[i])
+            {
+                dfs(edges,i,vis);
+            }
+        }
+    }
+
+	public static int numConnected(int[][] edges, int n) {
+        boolean vis[]=new boolean[n];
+        int count=0;
+        for(int i=0;i<n;i++)
+        {
+            if(!vis[i])
+            {
+                
+                dfs(edges,i,vis);
+                count++;
+            }
+        }
+        return count;
+        
+	}
+}
