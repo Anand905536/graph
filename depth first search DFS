@@ -1,0 +1,26 @@
+  // Function to return a list containing the DFS traversal of the graph.
+  
+  
+    void dfs(int node ,vector<int>adj[],vector<int>&ls,int vis[])
+{
+   vis[node]=1;
+   ls.push_back(node);
+   for(auto i:adj[node])            //travelling all node in adjlist
+   {
+      if(!vis[i])
+      {
+         vis[i]=1;                    //mark them visited if they are not
+         dfs(i,adj,ls,vis);
+      }
+   }
+
+}
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+       int vis[V]={0};
+       vis[0]=1;
+      int start=0;
+      vector<int>ls;
+     dfs(start,adj,ls,vis);
+     return ls;
+    }
+};
